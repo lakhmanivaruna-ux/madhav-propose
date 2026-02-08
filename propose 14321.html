@@ -1,0 +1,219 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Madhav ❤️</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(#ffdde1,#ee9ca7);
+  text-align:center;
+  overflow-x:hidden;
+}
+
+.screen{display:none;padding:30px 15px;}
+.active{display:block;}
+
+h1,h2,p{color:#b3003b;}
+
+button{
+  padding:12px 25px;
+  font-size:18px;
+  border:none;
+  border-radius:25px;
+  background:#ff3366;
+  color:white;
+  margin:10px;
+  cursor:pointer;
+}
+
+img{max-width:90%;border-radius:20px;margin:15px 0;}
+
+.rose{width:180px;}
+
+.heart-btn{
+  font-size:40px;
+  background:none;
+  border:none;
+  animation:pulse 1.2s infinite;
+}
+
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+
+.teddy{width:180px;}
+
+.box{width:160px;margin:30px auto;position:relative;}
+.box img{width:100%;}
+
+.ring{
+  position:absolute;
+  width:90px;
+  left:50%;
+  transform:translateX(-50%) translateY(40px);
+  opacity:0;
+}
+
+.show-ring{
+  animation:ringPop 2s forwards;
+}
+
+@keyframes ri
+ringPop{
+  0%{opacity:0;transform:translateX(-50%) translateY(40px) scale(0);}
+  100%{opacity:1;transform:translateX(-50%) translateY(-90px) scale(1);}
+}
+
+.confetti{
+  position:fixed;
+  width:8px;
+  height:8px;
+  top:-10px;
+  animation:fall 3s linear infinite;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SCREEN 1 : ROSE + HEART -->
+<div class="screen active">
+  <img src="rose.png" class="rose">
+  <h1>Hey Madhav ❤️</h1>
+  <p>Tap the heart, I wanna ask you something special 💕</p>
+  <button class="heart-btn" onclick="startJourney()">❤️</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen">
+  <h2>Are you happy with me? 💖</h2>
+  <button onclick="next()">Yes</button>
+  <button onclick="alert('Try again ❤️')">No</button>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen">
+  <h2>Do I make you feel loved and safe? 🫶</h2>
+  <button onclick="next()">Yes</button>
+  <button onclick="alert('Try again my love 💕')">No</button>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen">
+  <h2>Do you want to stay with me forever, my love? ♾️</h2>
+  <button onclick="next()">Yes</button>
+  <button onclick="alert('Try again 😭❤️')">No</button>
+</div>
+
+<!-- SCREEN 5 LOVE -->
+<div class="screen">
+  <img src="madhav1.jpg">
+  <p>
+    Madhav, loving you is the easiest and most beautiful thing I’ve ever done.
+    You make my ordinary days feel magical just by being in them.
+  </p>
+
+  <img src="madhav2.jpg">
+  <p>
+    With you, I feel understood, protected, and deeply loved.
+    You are my comfort, my happiness, my safe place.
+  </p>
+
+  <img src="madhav3.jpg">
+  <p>
+    Every smile of yours feels like home to me.
+    I want to hold your hand through every high and low of life.
+  </p>
+
+  <p>
+    No matter where life takes us, my heart will always choose you.
+    Today, tomorrow, and always… it’s you. ❤️
+  </p>
+
+  <button onclick="next()">Continue 💕</button>
+</div>
+
+<!-- SCREEN 6 RING -->
+<div class="screen">
+  <h2>I have something for you… 💍</h2>
+  <div class="box">
+    <img src="box.png">
+    <img src="ring.jpg" class="ring" id="ring">
+  </div>
+  <button onclick="showRing()">Open the box ❤️</button>
+</div>
+
+<!-- SCREEN 7 FINAL -->
+<div class="screen">
+  <img src="ring.png" class="teddy">
+  <h1>I love you, my love ❤️</h1>
+  <h2>Will you be mine always? 💖</h2>
+  <button onclick="confetti()">YES 💕</button>
+</div>
+
+<script>
+let step = 0;
+const screens = document.querySelectorAll('.screen');
+
+/* MUSIC UNLOCK */
+const music = document.getElementById("bgMusic");
+music.volume = 0.6;
+
+function unlockMusic(){
+  music.currentTime = 0;
+  music.play().catch(()=>{});
+  document.removeEventListener("click", unlockMusic);
+  document.removeEventListener("touchstart", unlockMusic);
+}
+document.addEventListener("click", unlockMusic);
+document.addEventListener("touchstart", unlockMusic);
+
+function startJourney(){
+  unlockMusic();
+  next();
+}
+
+function next(){
+  screens[step].classList.remove('active');
+  step++;
+  screens[step].classList.add('active');
+}
+
+function showRing(){
+  document.getElementById("ring").classList.add("show-ring");
+  setTimeout(next, 2500);
+}
+
+function confetti(){
+  for(let i=0;i<120;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+    c.style.animationDuration=2+Math.random()*3+"s";
+    document.body.appendChild(c);
+  }
+}
+</script>
+
+</body>
+</html>
+
+
+
